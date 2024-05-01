@@ -22,7 +22,7 @@ class Entity:
 
     def stats(self):
         print (f"{Fore.red}HEALTH{Style.reset}", self.hp)
-        print (f"{Fore.red}LEVEL{Style.reset}", self.lvl)
+        print (f"{Fore.yellow_1}LEVEL{Style.reset}", self.lvl)
    
 
 class Player(Entity):
@@ -30,6 +30,7 @@ class Player(Entity):
         Entity.__init__(self, lvl, name)
     
     def get_stats(self):
+        self.hp = 5
         print(f"{Fore.green}")
         print (f"NAME{Style.reset}", self.name)
         self.stats()
@@ -118,7 +119,21 @@ def enemyencounter(player):
         correct = Mathcombat()
         sleep(0.5)
         if correct:
-            pass
+            enemy.hp -= player.lvl * 2
+            print ("")
+            if enemy.hp >= 1:
+                print (f'{Fore.yellow}You damaged {Fore.red}{enemy.name}{Fore.yellow} for {Fore.yellow_1}{player.lvl * 2}{Fore.yellow} Damage, leaving {Fore.red}{enemy.name}{Fore.yellow} at {Fore.red}{enemy.hp}{Fore.yellow} Health{Style.reset}')
+            else:
+                print (f'{Fore.yellow}You killed {Fore.yellow_1}{enemy.name}')
+            print ("")
+        else:
+            player.hp -= enemy.lvl * 2
+            print ("")
+            if player.hp >= 1:
+                print (f'{Fore.yellow}You have been damaged by {Fore.red}{enemy.name}{Fore.yellow} for {Fore.yellow_1}{enemy.lvl * 2}{Fore.yellow} Damage, leaving yourself at {Fore.red}{player.hp}{Fore.yellow} Health{Style.reset}')
+                print ("")
+            else:
+                print (f'{Fore.red}You were killed by {Fore.red}{enemy.name}')
 
 user = Player(1,"player")
 
