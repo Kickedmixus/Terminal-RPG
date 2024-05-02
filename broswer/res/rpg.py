@@ -1,8 +1,7 @@
+
 from random import randint
 from time import sleep
 from colored import Fore, Back, Style
-from pyscript import document
-
 
 '''
 
