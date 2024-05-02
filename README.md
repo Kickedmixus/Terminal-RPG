@@ -1,5 +1,5 @@
 
-Terminal RPG - 1.0.0
+Terminal RPG - 1.0.3
 
 # HOW TO RUN
 
@@ -21,5 +21,5 @@ Terminal RPG - 1.0.0
 
  - if you could fix it plz edit through git
 
- - if you cant comment on github and i will try to fix it
+ - if you cant, comment on github and i will try to fix it
 

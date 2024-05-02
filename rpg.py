@@ -1,10 +1,9 @@
+
 from random import randint
 from time import sleep
 from colored import Fore, Back, Style
 
 '''
-
--Enemy encounter
 
 -Pick area
 
@@ -112,7 +111,7 @@ def Mathcombat():
 def enemyencounter(player):
     enemy = createEnemy(player.lvl)
     print ("")
-    print (f"{Fore.yellow} (-=(ENEMY=ENCOUNTER)=-) {Style.reset}")
+    print (f"{Fore.medium_orchid}-=(ENEMY=ENCOUNTER)=-) {Style.reset}")
     enemy.get_stats()
 
     while enemy.hp > 0 and player.hp > 0:
@@ -122,16 +121,16 @@ def enemyencounter(player):
             enemy.hp -= player.lvl * 2
             print ("")
             if enemy.hp >= 1:
-                print (f'{Fore.yellow}You damaged {Fore.red}{enemy.name}{Fore.yellow} for {Fore.yellow_1}{player.lvl * 2}{Fore.yellow} Damage, leaving {Fore.red}{enemy.name}{Fore.yellow} at {Fore.red}{enemy.hp}{Fore.yellow} Health{Style.reset}')
+                print (f'{Fore.medium_orchid}You damaged {Fore.red}{enemy.name}{Fore.medium_orchid} for {Fore.yellow_1}{player.lvl * 2} Damage{Fore.medium_orchid}, leaving {Fore.red}{enemy.name}{Fore.medium_orchid} at {Fore.red}{enemy.hp} Health{Style.reset}')
             else:
-                print (f'{Fore.yellow}You killed {Fore.yellow_1}{enemy.name}{Style.reset}')
+                print (f'{Fore.medium_orchid}You killed {Fore.yellow_1}{enemy.name}{Style.reset}')
                 player.hp = 3 + (player.lvl * 2)
             print ("")
         else:
             player.hp -= enemy.lvl * 2
             print ("")
             if player.hp >= 1:
-                print (f'{Fore.yellow}You have been damaged by {Fore.red}{enemy.name}{Fore.yellow} for {Fore.yellow_1}{enemy.lvl * 2}{Fore.yellow} Damage, leaving yourself at {Fore.red}{player.hp}{Fore.yellow} Health{Style.reset}')
+                print (f'{Fore.medium_orchid}You have been damaged by {Fore.red}{enemy.name}{Fore.medium_orchid} for {Fore.yellow_1}{enemy.lvl * 2} Damage{Fore.medium_orchid}, leaving {Fore.green}Yourself{Fore.medium_orchid} at {Fore.red}{player.hp} Health{Style.reset}')
                 print ("")
             else:
                 print (f'{Fore.red}You were killed by {Fore.red}{enemy.name}{Style.reset}')
