@@ -57,7 +57,7 @@ class Enemy(Entity):
 
             "water":["Tadpole","Seaweed","Fish","Jellyfish","Shark"],
 
-            "wind":["Fly","Breeze","Bird","Eagle","Cloud"],
+            "wind":["Fly","Breeze","Bird","Eagle","Wyrm"],
 
             "earth":["Ant","Worm","Snake","Monkey","Tree"],
 
@@ -124,7 +124,8 @@ def enemyencounter(player):
             if enemy.hp >= 1:
                 print (f'{Fore.yellow}You damaged {Fore.red}{enemy.name}{Fore.yellow} for {Fore.yellow_1}{player.lvl * 2}{Fore.yellow} Damage, leaving {Fore.red}{enemy.name}{Fore.yellow} at {Fore.red}{enemy.hp}{Fore.yellow} Health{Style.reset}')
             else:
-                print (f'{Fore.yellow}You killed {Fore.yellow_1}{enemy.name}')
+                print (f'{Fore.yellow}You killed {Fore.yellow_1}{enemy.name}{Style.reset}')
+                player.hp = 3 + (player.lvl * 2)
             print ("")
         else:
             player.hp -= enemy.lvl * 2
@@ -133,7 +134,7 @@ def enemyencounter(player):
                 print (f'{Fore.yellow}You have been damaged by {Fore.red}{enemy.name}{Fore.yellow} for {Fore.yellow_1}{enemy.lvl * 2}{Fore.yellow} Damage, leaving yourself at {Fore.red}{player.hp}{Fore.yellow} Health{Style.reset}')
                 print ("")
             else:
-                print (f'{Fore.red}You were killed by {Fore.red}{enemy.name}')
+                print (f'{Fore.red}You were killed by {Fore.red}{enemy.name}{Style.reset}')
 
 user = Player(1,"player")
 
