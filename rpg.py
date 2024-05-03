@@ -1,14 +1,12 @@
-
 from random import randint
 from time import sleep
 from colored import Fore, Back, Style
 
+
 '''
-
--Pick area
-
--Xp system
-
+TODO
+ - Pick area
+ - Xp system
 '''
 
 class Entity:

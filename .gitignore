@@ -1,0 +1,2 @@
+# ignore generated res file for browser app
+browser/output
