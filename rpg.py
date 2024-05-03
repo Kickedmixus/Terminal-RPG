@@ -103,7 +103,7 @@ def Mathcombat():
             print ("")
             return True
         else:
-            print (f"\t{Fore.red}-=(Wrong)=-{Style.reset}")
+            print (f"\t{Fore.red}-=(!Wrong!)=-{Style.reset}")
             print ("")
             return False
 
