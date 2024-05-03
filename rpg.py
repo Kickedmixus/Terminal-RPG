@@ -69,7 +69,9 @@ class Enemy(Entity):
 
 def createEnemy(lvl):
     return Enemy(lvl,"").set_enemy(lvl)
-   
+
+def createXpLimit(lvl):
+    return (lvl * 50) + ((lvl * lvl) / 5) - 0.5
         
 def Mathcombat():
     if randint(0,1) == 1:
@@ -106,9 +108,23 @@ def Mathcombat():
             print (f"\t{Fore.red}-=(Wrong)=-{Style.reset}")
             print ("")
             return False
-    
+
+def bar(type,max,current,power):
+    if type == "lvl":
+        bar = ("")
+        for i in range(10):
+            if current > max/10 * i:
+                bar += "#"
+            else:
+                bar += f"{Fore.grey_42}="
+        print (f'{Fore.yellow_1}Lvl {power}{Style.reset} <({Fore.spring_green_1}{bar}{Style.reset})> {Fore.yellow_1}Lvl {power+1}{Style.reset}')
+    else:
+        print ("ERROR bar not found")
 
 def enemyencounter(player):
+    global xp
+    global maxxp
+
     enemy = createEnemy(player.lvl)
     print ("")
     print (f"{Fore.medium_orchid}-=(ENEMY=ENCOUNTER)=-) {Style.reset}")
@@ -123,9 +139,22 @@ def enemyencounter(player):
             if enemy.hp >= 1:
                 print (f'{Fore.medium_orchid}You damaged {Fore.red}{enemy.name}{Fore.medium_orchid} for {Fore.yellow_1}{player.lvl * 2} Damage{Fore.medium_orchid}, leaving {Fore.red}{enemy.name}{Fore.medium_orchid} at {Fore.red}{enemy.hp} Health{Style.reset}')
             else:
-                print (f'{Fore.medium_orchid}You killed {Fore.yellow_1}{enemy.name}{Style.reset}')
+                xpgain = (enemy.lvl * 5) + (randint(0,5) / 2)
+                print (f'{Fore.medium_orchid}You killed {Fore.red}{enemy.name}{Fore.medium_orchid} and gained {Fore.spring_green_1}{xpgain} XP{Style.reset}')
+                xp += xpgain
+                if xp >= maxxp:
+                    player.lvl += 1
+                    print ("")
+                    print ("-=(LEVEL UP)=-")
+                    print ("Damage + 2")
+                    print ("Health + 2")
+                    print ("-=(LEVEL UP)=-")
+                    maxxp = createXpLimit(player.lvl)
+                else:
+                    print ("")
+                    bar("lvl", maxxp, xp, player.lvl)
+                    print ("")
                 player.hp = 3 + (player.lvl * 2)
-            print ("")
         else:
             player.hp -= enemy.lvl * 2
             print ("")
@@ -137,6 +166,8 @@ def enemyencounter(player):
 
 user = Player(1,"player")
 
+xp = 0
+maxxp = createXpLimit(user.lvl)
 
 print (f'''
 {Fore.rgb(243, 187, 243)}  ::::::::::: :::::::::: :::::::::     :::   :::   ::::::::::: ::::    :::     :::     :::           :::::::::  :::::::::   :::::::: 
