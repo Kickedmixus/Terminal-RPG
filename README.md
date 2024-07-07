@@ -1,4 +1,5 @@
 
+
 # Terminal RPG - 1.0.3
 
 ## How to Run
@@ -25,3 +26,4 @@ Just run `gen_output`.
 `gen_res`    - generates resources
 `gen_src`    - generates source code
 `gen_output` - generates output
+

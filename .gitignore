@@ -1,2 +1,5 @@
 # ignore generated res file for browser app
 browser/output
+
+# ignore __pycache__
+__pycache__
