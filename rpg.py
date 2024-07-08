@@ -15,21 +15,24 @@ class Entity:
         self.attack = self.lvl * 2
 
     def stats(self):
-        print (f"{Fore.yellow_1}LEVEL{Style.reset}", self.lvl)
-        print (f"{Fore.red}HEALTH{Style.reset}", self.hp)
+        print (f"{Fore.yellow_1}᪣ LEVEL{Style.reset}", self.lvl)
+        print (f"{Fore.red}♥ HEALTH{Style.reset}", self.hp)
    
 class Player(Entity):
-    def __init___(self, lvl, name, maxhp, dg):
+    def __init__(self, lvl, name, maxhp):
         Entity.__init__(self, lvl, name)
         self.maxhp = 5
         self.hp = self.maxhp
+        self.dg = 2
 
     def get_stats(self):
         print(f"{Fore.green}")
         print (f"NAME{Style.reset}", self.name)
         self.stats()
-        print (f"{Fore.red}DAMAGE{Style.reset}", self.dg)
+        print (f"{Fore.red}⚔ DAMAGE{Style.reset}", self.dg)
         print(f"{Style.reset}")
+
+coins = (0)
 
 class Enemy(Entity):
 
@@ -65,7 +68,7 @@ class Shop:
         self.lvl = user.lvl
 
         print ("")
-        print (f"{Fore.medium_orchid}Hello my name is",self.name,tradername[self.name][randint(0, 2)])
+        print (f"{Fore.medium_orchid}Hello my name is {self.name} {Fore.aquamarine_3}{tradername[self.name][randint(0, 2)]}")
         print (f"{Fore.grey_42}answer (trade) if you want to trade{Style.reset}")
         print ("")
 
@@ -77,9 +80,9 @@ class Shop:
     def createStock(self, lvl):
         stocklvl = randint(1,3)*lvl
         if randint(0,1) == 0:
-            stock = [stocklvl,"Health",tradeshealth[randint(0,len(tradeshealth)-1)]]
+            stock = [stocklvl,"♥ Health",tradeshealth[randint(0,len(tradeshealth)-1)]]
         else:
-            stock = [stocklvl,"Damage",tradesdamage[randint(0,len(tradesdamage)-1)]]
+            stock = [stocklvl,"⚔ Damage",tradesdamage[randint(0,len(tradesdamage)-1)]]
         return stock
 
     def trade(self, traderlvl):
@@ -88,13 +91,15 @@ class Shop:
         stock3 = self.createStock(traderlvl)
 
         print ("")
-        print (f"[Option 1]{Fore.rgb(173, 109, 0)}=(SHOP)========{Style.reset}[ {stock1[2]} [{Fore.yellow_1} {stock1[0]*5} Coins {Style.reset}] {Fore.red}+{stock1[0]} {stock1[1]}{Style.reset}")
-        print (f"[Option 2]     ('-')     [{Style.reset} {stock2[2]} [{Fore.yellow_1} {stock2[0]*5} Coins {Style.reset}] {Fore.red}+{stock2[0]} {stock2[1]}{Style.reset}")
-        print (f"[Option 3]{Fore.rgb(173, 109, 0)}==============={Style.reset}[ {stock3[2]} [{Fore.yellow_1} {stock3[0]*5} Coins {Style.reset}] {Fore.red}+{stock3[0]} {stock3[1]}{Style.reset}")
+        print (f"[Option 1 ꥟ ]=(SHOP)========{Style.reset}[ {Fore.aquamarine_3}{stock1[2]}{Style.reset} [{Fore.yellow_1} {stock1[0]*5} ⛃ Coins {Style.reset}] {Fore.red}+{stock1[0]} {stock1[1]}{Style.reset}")
+        print (f"[Option 2 ꥟ ]     ('-')     [{Style.reset} {Fore.aquamarine_3}{stock2[2]}{Style.reset} [{Fore.yellow_1} {stock2[0]*5} ⛃ Coins {Style.reset}] {Fore.red}+{stock2[0]} {stock2[1]}{Style.reset}")
+        print (f"[Option 3 ꥟ ]==============={Style.reset}[ {Fore.aquamarine_3}{stock3[2]}{Style.reset} [{Fore.yellow_1} {stock3[0]*5} ⛃ Coins {Style.reset}] {Fore.red}+{stock3[0]} {stock3[1]}{Style.reset}")
         print("")
 
-        print ("to buy an item answer the option, example (1)")
+        print (f"{Fore.grey_42}to buy an item answer the option, example (1){Style.reset}")
         print("")
+
+        into = input(">?>")
 
 
 def createEnemy(lvl):
@@ -114,11 +119,11 @@ def Mathcombat():
         user_answer = input(">?> ")
         print ("")
         if str(answer) == user_answer:
-            print (f"\t{Fore.green}-=(Correct)=-{Style.reset}")
+            print (f"\t{Fore.green}-=𑗕(Correct)𑗕=-{Style.reset}")
             print ("")
             return True
         else:
-            print (f"\t{Fore.red}-=(Wrong)=-{Style.reset}")
+            print (f"\t{Fore.red}-=𑗕(Wrong)𑗕=-{Style.reset}")
             print ("")
             return False
     else:
@@ -131,29 +136,40 @@ def Mathcombat():
         user_answer = input(">?> ")
         print ("")
         if str(answer) == user_answer:
-            print (f"\t{Fore.green}-=(Correct)=-{Style.reset}")
+            print (f"\t{Fore.green}-=𑗕(Correct)𑗕=-{Style.reset}")
             print ("")
             return True
         else:
-            print (f"\t{Fore.red}-=(!Wrong!)=-{Style.reset}")
+            print (f"\t{Fore.red}-=𑗕(!Wrong!)𑗕=-{Style.reset}")
             print ("")
             return False
 
 def bar(type,max,current,power):
     if type == "lvl":
         bar = ("")
-        for i in range(10):
-            if current > max/10 * i:
+        for i in range(20):
+            if current > max/20 * i:
                 bar += "#"
             else:
                 bar += f"{Fore.grey_42}="
-        print (f'{Fore.yellow_1}Lvl {power}{Style.reset} <({Fore.spring_green_1}{bar}{Style.reset})> {Fore.yellow_1}Lvl {power+1}{Style.reset}')
+        print (f'{Fore.yellow_1}Lvl {power}᪣{Style.reset} <({Fore.spring_green_1}{bar}{Style.reset})> {Fore.yellow_1}Lvl {power+1}᪣{Style.reset}')
+    elif type == "money":
+        current = current - moneystatus[moneystatus.index(power)][0]
+        max = moneystatus[moneystatus.index(power)][1] - moneystatus[moneystatus.index(power)][0]
+        bar = ("")
+        for i in range(10):
+            if current > max/10 * i:
+                bar += "🞛"
+            else:
+                bar += f"{Fore.grey_42}🞚"
+        print (f'{Fore.yellow_1}{power} {moneystatus[moneystatus.index(power)][0]} <({Fore.yellow_1}{bar})> {Fore.yellow_1}{moneystatus[moneystatus.index(power)][1]} {moneystatus[moneystatus.index(power)+1]}')
     else:
-        print ("ERROR bar not found")
+        print ("🮕ERROR🮕 (bar index not found)")
 
 def enemyencounter(player):
     global xp
     global maxxp
+    global coins
 
     enemy = createEnemy(player.lvl)
     print ("")
@@ -164,25 +180,30 @@ def enemyencounter(player):
         correct = Mathcombat()
         sleep(0.5)
         if correct:
-            enemy.hp -= player.lvl * 2
+            enemy.hp -= player.dg
             print ("")
             if enemy.hp >= 1:
-                print (f'{Fore.medium_orchid}You damaged {Fore.red}{enemy.name}{Fore.medium_orchid} for {Fore.yellow_1}{player.lvl * 2} Damage{Fore.medium_orchid}, leaving {Fore.red}{enemy.name}{Fore.medium_orchid} at {Fore.red}{enemy.hp} Health{Style.reset}')
+                print (f'{Fore.medium_orchid}You damaged {Fore.red}{enemy.name}{Fore.medium_orchid} for {Fore.yellow_1}{player.dg} Damage{Fore.medium_orchid}, leaving {Fore.red}{enemy.name}{Fore.medium_orchid} at {Fore.red}{enemy.hp} Health{Style.reset}')
             else:
                 xpgain = (enemy.lvl * 5) + (randint(0,5) / 2)
-                print (f'{Fore.medium_orchid}You killed {Fore.red}{enemy.name}{Fore.medium_orchid} and gained {Fore.spring_green_1}{xpgain} XP{Style.reset}')
+                print (f'{Fore.medium_orchid}You killed {Fore.red}{enemy.name}{Fore.medium_orchid} and gained {Fore.yellow_1}+{xpgain} ✨ XP{Fore.medium_orchid} and {Fore.yellow_1}+{2*enemy.lvl} ⛃ Coins{Style.reset}')
+                print (f"{Fore.grey_42}to check your wallet use the (wallet) command{Style.reset}")
                 xp += xpgain
+                coins += (2*enemy.lvl)
                 if xp >= maxxp:
                     player.lvl += 1
                     print ("")
-                    print ("-=(LEVEL UP)=-")
-                    print ("Damage + 2")
-                    print ("Health + 2")
-                    print ("-=(LEVEL UP)=-")
+                    print ("-=(᪣LEVEL UP᪣)=-")
+                    print ("⚔ Damage + 2")
+                    print ("♥ Health + 2")
+                    print ("-=(᪣LEVEL UP᪣)=-")
+                    print (f"{Fore.grey_42}to check your stats use the (stats) command{Style.reset}")
                     maxxp = createXpLimit(player.lvl)
+                    player.dg += 2
                 else:
                     print ("")
                     bar("lvl", maxxp, xp, player.lvl)
+                    print (f"{Fore.medium_orchid}you need {Fore.yellow_1}{maxxp - xp}✨ XP{Fore.medium_orchid} more to level up{Style.reset}")
                     print ("")
                 user.maxhp = 3 + (player.lvl * 2)
                 user.hp = user.maxhp
@@ -193,9 +214,14 @@ def enemyencounter(player):
                 print (f'{Fore.medium_orchid}You have been damaged by {Fore.red}{enemy.name}{Fore.medium_orchid} for {Fore.yellow_1}{enemy.lvl * 2} Damage{Fore.medium_orchid}, leaving {Fore.green}Yourself{Fore.medium_orchid} at {Fore.red}{player.hp} Health{Style.reset}')
                 print ("")
             else:
-                print (f'{Fore.red}You were killed by {Fore.red}{enemy.name}{Style.reset}')
+                print (f'{Fore.red}☠You were killed by {Fore.red}{enemy.name}☠{Style.reset}')
 
-user = Player(1,"player")
+user = Player(1,"player",5)
+
+def wallet(coins):
+    print("")
+    print (f'{Fore.medium_orchid}You have {Fore.yellow_1}{coins} ⛃ Coins{Style.reset}')
+    print("")
 
 xp = 0
 maxxp = createXpLimit(user.lvl)
@@ -209,11 +235,14 @@ print (f'''
 {Fore.purple_1a} #+#     #+#        #+#    #+#  #+#       #+#     #+#     #+#   #+#+# #+#     #+# #+#           #+#    #+# #+#        #+#    #+#     
 {Fore.purple_1a}###     ########## ###    ###  ###       ### ########### ###    #### ###     ### ##########    ###    ### ###         ########
 
-{Fore.rgb(245, 132, 255)}Made by MIXUS{Style.reset}
+{Fore.rgb(245, 132, 255)}Made by MIXUS (1.0.7){Style.reset}
 {Fore.grey_42}tips are in grey, press enter until a enemy attacks{Style.reset}
 ''')
 
+#gameloop
+
 while user.hp > 0:
+    bar("money",None,2,"Broke")
 
     into = input(">>> ")
     if into == "stop":
@@ -226,34 +255,50 @@ while user.hp > 0:
         user.get_stats()
     elif into == "attack":
         Mathcombat()
-    elif into == "cheatxp":
-        xpgain = (10) + (randint(0,5) / 2)
-        xp += xpgain
-        if xp >= maxxp:
-            user.lvl += 1
-            print ("")
-            print (f"{Fore.yellow_1}-=(LEVEL UP)=-")
-            print (f"{Fore.red}Damage + 2")
-            print (f"{Fore.red}Health + 2")
-            print (f'{Fore.yellow_1}-=(LEVEL UP)=-{Style.reset}')
-            print ("")
-            maxxp = createXpLimit(user.lvl)
-        else:
-            print ("")
-            bar("lvl", maxxp, xp, user.lvl)
-            print ("")
-        user.maxhp = 3 + (user.lvl * 2)
-        user.hp = user.maxhp
-    elif into == "shop":
-        Shop()
+    elif into == "wallet":
+        wallet(coins)
 
-print (f"""{Fore.dark_red_2}
+    #CHEATS (u think ur so cool finding these codes ,Mr. ultimate haxxor)
+    
+    elif into == "madewithrealcheese":
+        print ("")
+        print (f"{Fore.dark_red_2}(☠(☠(ULTIMATE HAXXOR MODE ENABLED)☠)☠){Style.reset}")
+        print ("")
+        into = input(">INPUTCHEAT>")
+        if into == "cheatxp":
+            xpgain = (100) + (randint(0,5) / 2)
+            xp += xpgain
+            if xp >= maxxp:
+                user.lvl += 1
+                print ("")
+                print (f"{Fore.yellow_1}-=(᪣LEVEL UP᪣)=-")
+                print (f"{Fore.red}⚔ Damage + 2")
+                print (f"{Fore.red}♥ Health + 2")
+                print (f'{Fore.yellow_1}-=(᪣LEVEL UP᪣)=-{Style.reset}')
+                print (f"{Fore.grey_42}to check your stats use the (stats) command{Style.reset}")
+                print ("")
+                maxxp = createXpLimit(user.lvl)
+            else:
+                print ("")
+                bar("lvl", maxxp, xp, user.lvl)
+                print ("")
+            user.maxhp = 3 + (user.lvl * 2)
+            user.hp = user.maxhp
+        elif into == "cheatshop":
+            Shop()
+        elif into == "cheatcoin":
+            coins = 999999999
+            print (f"{Fore.yellow_1} +999999999 ⛃ Coins{Style.reset}")
+        print ("")
+if user.hp <= 0:
+    print (f"""{Fore.dark_red_2}
+     ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
+    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+    ██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+    ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+     ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
 
- ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
-██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
-██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
-██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
-╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
- ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
-
-{Style.reset}""")
+    {Style.reset}""")
+else:
+    print ("🮕ERROR🮕 (non death gameloop breakage)")
